@@ -1,8 +1,10 @@
-﻿#define ARRAYS_1
+﻿//#define ARRAYS_1
 //#define ARRAYS_2
+//#define JAGGED_ARRAYS
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +49,14 @@ namespace Arrays
                 if (arr[i] > max) max = arr[i];
             }
             Console.WriteLine($"Максимальное значение: {max}");
+
+            Console.WriteLine("-------------------------------------");
+
+            Console.WriteLine($"Сумма: {arr.Sum()}");
+            Console.WriteLine($"Среднее-арифметическое: {arr.Average()}");
+            Console.WriteLine($"Минимальное значение: {arr.Min()}");
+            Console.WriteLine($"Максимальное значение: {arr.Max()}");
+
 #endif
 #if ARRAYS_2
             int[,] i_arr_2 =
@@ -72,9 +82,59 @@ namespace Arrays
             {
                 Console.Write(i + "\t");
             }
-            Console.WriteLine(); 
+            Console.WriteLine();
+
+            Console.WriteLine($"Сумма: {i_arr_2.Cast<int>().ToArray().Sum()}");
+            Console.WriteLine($"Среднее-арифметическое: {i_arr_2.Cast<int>().ToArray().Average()}");
+            Console.WriteLine($"Минимальное значение: {i_arr_2.Cast<int>().ToArray().Min()}");
+            Console.WriteLine($"Максимальное значение: {i_arr_2.Cast<int>().ToArray().Max()}");
 #endif
 
+#if JAGGED_ARRAYS
+
+            int[][] j_arr =
+            {
+                new int[] { 3, 5, 8, 13, 21},
+                new int[] { 34, 55, 89},
+                new int[] { 144, 233, 377, 610, 987},
+            };
+
+            for (int i = 0; i < j_arr.Length; i++)
+            {
+                for (int j = 0; j < j_arr[i].Length; j++)
+                {
+                    Console.Write(j_arr[i][j] + "\t");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("----------------------");
+            foreach (int[] i in j_arr)
+            {
+                foreach (int j in i)
+                {
+                    Console.Write(j + "\t");
+                }
+                Console.WriteLine();
+            }
+
+#endif
+
+            Console.Write("Введите размер массива: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            int[] arr = new int[n];
+            Random rand = new Random();
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                //Console.Write(arr[i] + "\t");
+                arr[i] = rand.Next(50, 100);
+            }
+            foreach (int i in arr)
+            {
+                Console.Write(i + "\t");
+            }
+
+            Console.WriteLine();
         }
     }
 }
